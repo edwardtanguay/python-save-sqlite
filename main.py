@@ -35,5 +35,5 @@ session.commit()
 # display data
 skills = session.query(Skill).all()
 for skill in skills:
-    print(f"RECORD #{skill.id}: {skill.idCode}, {skill.name}, {skill.url}, {skill.description}")
+    print(f"RECORD #{skill.id}: {skill.name}")
 

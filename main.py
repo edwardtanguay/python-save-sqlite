@@ -19,12 +19,13 @@ else:
 
 class Skill(Base):
     __tablename__ = "skills"
+    id = Column(Integer, primary_key=True)
     idCode = Column(String)
     name = Column(String)
     url = Column(String)
     description = Column(String)
 
-# save data
+# save to sqlite
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -32,8 +33,8 @@ skill = Skill(idCode="react", name="React", url="httpnnn", description="ddd")
 session.add(skill)
 session.commit()
 
-# display data
-users = session.query(User).all()
-for user in users:
-    print(f"ID: {user.id}, Name: {user.name}, Age: {user.age}")
+# # display data
+skills = session.query(Skill).all()
+for skill in skills:
+    print(f"Name: {skill.name}")
 

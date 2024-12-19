@@ -23,21 +23,16 @@ class Skill(Base):
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
-
-
 if response.status_code == 200:
     data = response.json()
     for item in data:
-        skill = Skill(idCode="react", name="React", url="httpnnn", description="ddd")
+        skill = Skill(idCode=item['idCode'], name=item['name'], url="httpnnn", description="ddd")
         session.add(skill)
 else:
     print(f"Failed to fetch data: {response.status_code}")
-
-
-
 session.commit()
 
-# # display data
+# display data
 skills = session.query(Skill).all()
 for skill in skills:
     print(f"Name: {skill.name}")

@@ -11,30 +11,29 @@ url = "https://edwardtanguay.vercel.app/share/skills.json"
 response = requests.get(url)
 
 if response.status_code == 200:
-	data = response.json()
-
-	for item in data[:5]:
-		print(item)
+    data = response.json()
+    for item in data[:5]:
+        print(item)
 else:
-	print(f"Failed to fetch data: {response.status_code}")
+    print(f"Failed to fetch data: {response.status_code}")
 
-
-class User(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True)
+class Skill(Base):
+    __tablename__ = "skills"
+    idCode = Column(String)
     name = Column(String)
-    age = Column(Integer)
+    url = Column(String)
+    description = Column(String)
 
 # save data
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
-new_user = User(name="Hans", age=22)
-session.add(new_user)
-new_user = User(name="Sarah", age=20)
+skill = Skill(idCode="react", name="React", url="httpnnn", description="ddd")
+session.add(skill)
 session.commit()
 
 # display data
 users = session.query(User).all()
 for user in users:
     print(f"ID: {user.id}, Name: {user.name}, Age: {user.age}")
+
